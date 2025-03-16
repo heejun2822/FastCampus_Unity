@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         GameControl.aInstance.Init();
         SpawnManager.aInstance.Init();
         FSMStageController.aInstance.Init();
+
+        FSMStageController.aInstance.EnterStage();
     }
 
     void OnDestroy()
@@ -36,6 +38,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FSMStageController.aInstance.OnUpdate(Time.deltaTime);
     }
 }
