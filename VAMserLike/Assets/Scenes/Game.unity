@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mStageId: 1
-  mMyPc: {fileID: 0}
+  mMyPc: {fileID: 3687000653488322028}
   mNpcSpawnParent: {fileID: 0}
   mSkillObjectParent: {fileID: 0}
   mItemObjectParent: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 547954336}
   - component: {fileID: 547954338}
   - component: {fileID: 547954337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(-100.0, 0.0, -73.1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 584824257}
   - component: {fileID: 584824259}
   - component: {fileID: 584824258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(100.0, 0.0, 26.9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 852269528}
   - component: {fileID: 852269530}
   - component: {fileID: 852269529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(0.0, 0.0, 126.9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 878733303}
   - component: {fileID: 878733305}
   - component: {fileID: 878733304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 1097550705}
   - component: {fileID: 1097550707}
   - component: {fileID: 1097550706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(-100.0, 0.0, 26.9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 1257117669}
   - component: {fileID: 1257117671}
   - component: {fileID: 1257117670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(100.0, 0.0, 126.9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449909035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 1966909300}
   - component: {fileID: 1966909302}
   - component: {fileID: 1966909301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(0.0, 0.0, -73.1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 2071995092}
   - component: {fileID: 2071995094}
   - component: {fileID: 2071995093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(-100.0, 0.0, 126.9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1053,7 @@ GameObject:
   - component: {fileID: 2105966710}
   - component: {fileID: 2105966712}
   - component: {fileID: 2105966711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_(100.0, 0.0, -73.1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,6 +1191,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d09f2341193f2ec47a0786a59cb08e40, type: 3}
+--- !u!1 &3687000653488322028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7103438318668173895, guid: d09f2341193f2ec47a0786a59cb08e40, type: 3}
+  m_PrefabInstance: {fileID: 2421063762437398163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
