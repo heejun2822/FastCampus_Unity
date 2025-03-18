@@ -8,3 +8,11 @@ public enum SkillType
     ManualMissile,
     MoveSpeedUp,
 }
+
+public class ActiveSkillData
+{
+    public SkillType Type;
+    public float Cooltime;
+    public float Speed;
+    public Vector3 FirePosition;
+}
