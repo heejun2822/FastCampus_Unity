@@ -5,9 +5,16 @@ using UnityEngine;
 public class SkillBase : MonoBehaviour
 {
     public SkillType mSkillType { set; get; }
-
-    public virtual void FireSkill(Vector3 InStartPos, Vector3 InStartDir)
+    public Vector3 mStartPos { get; private set; }
+    public Vector3 mStartDir { get; private set; }
+    public ActiveSkillData mActiveSkillData { get; private set; }
+    public virtual void FireSkill(ActiveSkillData InSkillData, Vector3 InStartPos, Vector3 InStartDir)
     {
+        mActiveSkillData = InSkillData;
+        mStartPos = InStartPos;
+        mStartDir = InStartDir;
+
+        transform.position = mStartPos;
     }
 
     public virtual void StopSkill()

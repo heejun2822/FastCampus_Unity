@@ -12,5 +12,7 @@ public enum SkillType
 public class ActiveSkillData
 {
     public SkillType Type;
+    public float Cooltime;
+    public float Speed;
     public Vector3 FirePosition;
 }

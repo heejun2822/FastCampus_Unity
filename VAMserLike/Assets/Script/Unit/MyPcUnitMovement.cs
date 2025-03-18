@@ -20,6 +20,12 @@ public class MyPcUnitMovement : UnitMovementBase
         GameControl.aInstance.aOnMoveEnd -= HandleMoveEnd;
     }
 
+    public void DoManualAttack(SkillType InSkillType, Vector3 InAttackPos)
+    {
+        Vector3 IAttackDirect = (InAttackPos - transform.position).normalized;
+        mRotationTransform.rotation = Quaternion.RotateTowards(mRotationTransform.rotation, Quaternion.LookRotation(IAttackDirect), 360);
+    }
+
     private void HandleMoving(Vector3 pDirect)
     {
         // 이동

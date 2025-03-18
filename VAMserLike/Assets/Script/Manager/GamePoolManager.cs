@@ -50,6 +50,10 @@ public class GamePoolManager
         {
             return null;
         }
+        if (SkillPool[InSkillType].Count == 0)
+        {
+            return null;
+        }
         return SkillPool[InSkillType].Dequeue();
     }
 
