@@ -1,0 +1,102 @@
+{
+	"Skills" :
+	[
+		{
+			"Type" : "Missile",
+			"ActiveType": "Auto",
+			"LevelDatas" : 
+			[
+				{
+					"Level" : 1,
+					"Path" : "Prefabs/Skill/Missile1",
+					"Power" : 500,
+					"Size" : 1,
+					"Speed" : 10,
+					"CoolTime" : 0.5
+				},
+				{
+					"Level" : 2,
+					"Path" : "Prefabs/Skill/Missile1",
+					"Power" : 600,
+					"Size" : 1,
+					"Speed" : 15,
+					"CoolTime" : 0.4
+				},
+			]
+		},
+		{
+			"Type" : "ManualMissile",
+			"ActiveType": "Manual",
+			"LevelDatas" : 
+			[
+				{
+					"Level" : 1,
+					"Path" : "Prefabs/Skill/Missile1",
+					"Power" : 500,
+					"Size" : 1,
+					"Speed" : 10,
+					"ActiveTime" : 0.5,
+					"CoolTime" : 0.4
+				},
+				{
+					"Level" : 2,
+					"Path" : "Prefabs/Skill/Missile2",
+					"Power" : 1000,
+					"Size" : 1,
+					"Speed" : 15,
+					"ActiveTime" : 0.5,
+					"CoolTime" : 0.4
+				},
+			]
+		},
+		{
+			"Type" : "MagicRain",
+			"ActiveType": "Auto",
+			"LevelDatas" : 
+			[
+				{
+					"Level" : 1,
+					"Path" : "Prefabs/Skill/MagicRain",
+					"Power" : 1000,
+					"Size" : 1,
+					"Speed" : 10,
+					"ActiveTime" : 3.5,
+					"CoolTime" : 5
+				},
+				{
+					"Level" : 2,
+					"Path" : "Prefabs/Skill/MagicRain",
+					"Power" : 1000,
+					"Size" : 1,
+					"Speed" : 15,
+					"ActiveTime" : 3.5,
+					"CoolTime" : 4
+				},
+			]
+		},
+		{
+			"Type" : "MoveSpeedUp",
+			"ActiveType": "Buff",
+			"LevelDatas" : 
+			[
+				{
+					"Level" : 1,
+					"Path" : "Prefabs/Skill/Missile1",
+					"Power" : 500,
+					"Size" : 1,
+					"Speed" : 10,
+					"CoolTime" : 0.5
+				},
+				{
+					"Level" : 2,
+					"Path" : "Prefabs/Skill/Missile1",
+					"Power" : 600,
+					"Size" : 1,
+					"Speed" : 15,
+					"CoolTime" : 0.4
+				},
+			]
+		}
+			
+	]
+}
