@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
         GameControl.aInstance.SetControlObject(mMyPc);
 
         SpawnManager.aInstance.Init();
+        SpawnManager.aInstance.SetupSpawnPoint(mMyPc);
+
         FSMStageController.aInstance.Init();
 
         FSMStageController.aInstance.EnterStage();

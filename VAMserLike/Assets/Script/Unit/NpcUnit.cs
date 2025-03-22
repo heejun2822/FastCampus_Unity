@@ -21,5 +21,23 @@ public class NpcUnit : UnitBase
     {
         InitUnit(InUnitId, InStageUnitData.Hp, InStageUnitData.Power, InStageUnitData.Armor);
         mStageUnitData = InStageUnitData;
+
+        GameDataManager.aInstance.mLiveNpcUnitCount++;
+    }
+
+    public void SetSpeed(float InSpeed)
+    {
+        mStageUnitData.UnitSpeed = InSpeed;
+        NpcUnitMovement Movement = GetComponent<NpcUnitMovement>();
+        if (Movement != null)
+        {
+            Movement.mSpeed = InSpeed;
+        }
+    }
+
+    public override void OnDie()
+    {
+        base.OnDie();
+        GameDataManager.aInstance.mLiveNpcUnitCount = Mathf.Max(0, --GameDataManager.aInstance.mLiveNpcUnitCount);
     }
 }

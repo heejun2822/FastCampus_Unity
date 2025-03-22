@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 public class GameDataManager
 {
     public int mStage { get; private set; }
+    public int mLiveNpcUnitCount { get; set; } = 0;
     public static GameDataManager aInstance
     {
         get
@@ -57,6 +58,8 @@ public class GameDataManager
 
         SkillResources.Clear();
         SkillResources = null;
+
+        mLiveNpcUnitCount = 0;
     }
 
     public void LoadAll()

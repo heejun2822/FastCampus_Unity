@@ -14,6 +14,18 @@ public class FSMStageStateEnter : FSMStateBase
     public override void OnEnter()
     {
         base.OnEnter();
+        mCountDown = 0;
+        mDurationTime = 0;
+
+        int ICurrentStageId = GameDataManager.aInstance.mStage;
+        StageData ICurrentStageData = GameDataManager.aInstance.FindStageData(ICurrentStageId);
+        if (ICurrentStageData != null)
+        {
+            foreach (StageUnitData EachNpc in ICurrentStageData.Units)
+            {
+                SpawnManager.aInstance.AddUnitData(EachNpc.UnitId, EachNpc);
+            }
+        }
     }
 
     public override void OnExit()

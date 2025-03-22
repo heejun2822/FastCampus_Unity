@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mStageId: 1
   mMyPc: {fileID: 3687000653488322028}
-  mNpcSpawnParent: {fileID: 0}
+  mNpcSpawnParent: {fileID: 892458547}
   mSkillObjectParent: {fileID: 1746520578}
   mItemObjectParent: {fileID: 0}
 --- !u!1 &547954335
