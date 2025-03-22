@@ -49,6 +49,9 @@ public class GameDataManager
         mItemRoot = null;
         mSkillRoot = null;
 
+        StageDatas.Clear();
+        StageDatas = null;
+
         SkillDatas.Clear();
         SkillDatas = null;
 
@@ -58,10 +61,53 @@ public class GameDataManager
 
     public void LoadAll()
     {
+        LoadStageData();
         LoadSkillData();
     }
 
-    public void LoadSkillData()
+    protected void LoadStageData()
+    {
+        StageDatas = new Dictionary<int, StageData>();
+        StageDatas.Clear();
+
+        TextAsset StageJsonTextAsset = Resources.Load<TextAsset>("Data/StageDatas");
+        string IStageJson = StageJsonTextAsset.text;
+        JObject IStageDataObject = JObject.Parse(IStageJson);
+        JToken IStageToken = IStageDataObject["Stages"];
+        JArray IStageArray = IStageToken.Value<JArray>();
+
+        foreach (JObject EachObject in IStageArray)
+        {
+            StageData NewStageData = new StageData();
+            NewStageData.StageId = EachObject.Value<int>("StageId");
+            NewStageData.MaxSpawnCount = EachObject.Value<int>("MaxSpawn");
+            NewStageData.DropId = EachObject.Value<string>("DropId");
+            JArray INpcArray = EachObject.Value<JArray>("UnitPaths");
+            foreach (JObject EachNpc in INpcArray)
+            {
+                StageUnitData UnitData = new StageUnitData();
+                UnitData.UnitId = EachNpc.Value<string>("Id");
+                UnitData.UnitPath = EachNpc.Value<string>("Path");
+                UnitData.UnitSpeed = EachNpc.Value<float>("Speed");
+                UnitData.Hp = EachNpc.Value<int>("Hp");
+                UnitData.Armor = EachNpc.Value<int>("Armor");
+                UnitData.Power = EachNpc.Value<int>("Power");
+                NewStageData.Units.Add(UnitData);
+            }
+            StageDatas.Add(NewStageData.StageId, NewStageData);
+        }
+    }
+
+    public StageData FindStageData(int InStageId)
+    {
+        if (StageDatas.ContainsKey(InStageId) == false)
+        {
+            return null;
+        }
+        return StageDatas[InStageId];
+    }
+
+    protected void LoadSkillData()
     {
         SkillDatas = new Dictionary<SkillType, SkillData>();
         SkillResources = new Dictionary<string, SkillBase>();
@@ -174,4 +220,6 @@ public class GameDataManager
 
     private Dictionary<SkillType, SkillData> SkillDatas = null;
     private Dictionary<string, SkillBase> SkillResources = null;
+
+    private Dictionary<int, StageData> StageDatas = null;
 }
