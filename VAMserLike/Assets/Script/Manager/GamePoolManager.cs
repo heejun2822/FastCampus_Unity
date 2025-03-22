@@ -19,12 +19,16 @@ public class GamePoolManager
     public void Init()
     {
         SkillPool = new Dictionary<SkillType, Queue<SkillBase>>();
+        NpcPool = new Dictionary<string, Queue<NpcUnit>>();
     }
 
     public void Clear()
     {
         SkillPool.Clear();
         SkillPool = null;
+
+        NpcPool.Clear();
+        NpcPool = null;
     }
 
     public void EnqueueSkillPool(SkillBase InSkill)
@@ -57,7 +61,39 @@ public class GamePoolManager
         return SkillPool[InSkillType].Dequeue();
     }
 
+    public void EnqueueNpcPool(NpcUnit InNpcUnit)
+    {
+        string IUnitId = InNpcUnit.mStageUnitData.UnitId;
+        if (NpcPool == null)
+        {
+            return;
+        }
+        if (NpcPool.ContainsKey(IUnitId) == false)
+        {
+            NpcPool.Add(IUnitId, new Queue<NpcUnit>());
+        }
+        NpcPool[IUnitId].Enqueue(InNpcUnit);
+    }
+
+    public NpcUnit DequeueNpcPool(string InUnitId)
+    {
+        if (NpcPool == null)
+        {
+            return null;
+        }
+        if (NpcPool.ContainsKey(InUnitId) == false)
+        {
+            return null;
+        }
+        if (NpcPool[InUnitId].Count == 0)
+        {
+            return null;
+        }
+        return NpcPool[InUnitId].Dequeue();
+    }
+
     private static GamePoolManager sInstance = null;
 
     private Dictionary<SkillType, Queue<SkillBase>> SkillPool = null;
+    private Dictionary<string, Queue<NpcUnit>> NpcPool = null;
 }

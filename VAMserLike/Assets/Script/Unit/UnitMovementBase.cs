@@ -14,7 +14,7 @@ public class UnitMovementBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         // Height 계산
         Vector3 INowPosition = transform.position + new Vector3(0, 100, 0);
