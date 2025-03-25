@@ -26,6 +26,11 @@ public class FSMStageStateEnter : FSMStateBase
                 SpawnManager.aInstance.AddUnitData(EachNpc.UnitId, EachNpc);
             }
         }
+        MyPcUnit MyPc = GameDataManager.aInstance.GetMyPcObject().GetComponent<MyPcUnit>();
+        if (MyPc != null)
+        {
+            MyPc.InitUnit(0, 10000, 100, 100);
+        }
     }
 
     public override void OnExit()

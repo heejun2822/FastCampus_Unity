@@ -6,7 +6,7 @@ using UnityEngine;
 public class FSMStageStateProgress : FSMStateBase
 {
     public FSMStageStateProgress()
-        : base(EFSMStageStateType.StageStart)
+        : base(EFSMStageStateType.StageProgress)
     {
 
     }
@@ -44,7 +44,7 @@ public class FSMStageStateProgress : FSMStateBase
         bool bSpawn = false;
         if (mDurationTime > mNextSpawnTime)
         {
-            mNowSpawn += 10;
+            mNowSpawn = 1;
             mNowSpawn = Mathf.Min(mNowSpawn, mMaxSpawn);
             mNextSpawnTime += 3.0f;
             bSpawn = true;

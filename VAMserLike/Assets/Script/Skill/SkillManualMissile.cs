@@ -33,4 +33,18 @@ public class SkillManualMissile : SkillBase
         }
         StopSkill();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == null)
+        {
+            return;
+        }
+        NpcUnit TargetNpcUnit = other.GetComponent<NpcUnit>();
+        if (TargetNpcUnit != null)
+        {
+            TargetNpcUnit.OnHit(mActiveSkillData.Power);
+            StopSkill();
+        }
+    }
 }
