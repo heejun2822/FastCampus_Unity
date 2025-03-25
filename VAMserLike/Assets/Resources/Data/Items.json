@@ -1,0 +1,22 @@
+{
+	"Items": [
+		{
+			"Id": "Exp10",
+			"Type": "Exp",
+			"Path": "Prefabs/Items/ExpItem100",
+			"Value": 100
+		},
+		{
+			"Id": "Exp15",
+			"Type": "Exp",
+			"Path": "Prefabs/Items/ExpItem150",
+			"Value": 150
+		},
+		{
+			"Id": "ManualSword",
+			"Type": "Weapon",
+			"Path": "Prefabs/Items/WeaponSword",
+			"Value": 1
+		}
+	]
+}
