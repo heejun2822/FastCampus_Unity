@@ -42,5 +42,28 @@ public class ItemManager
         GamePoolManager.aInstance.EnqueueItemPool(InItemBase);
     }
 
+    public void DropItem(Vector3 InDropPos)
+    {
+        int IStageId = GameDataManager.aInstance.mStage;
+        StageData IStageData = GameDataManager.aInstance.FindStageData(IStageId);
+        if (IStageData == null)
+        {
+            return;
+        }
+        DropData ICurrentDropData = GameDataManager.aInstance.FindDropData(IStageData.DropId);
+        if (ICurrentDropData == null)
+        {
+            return;
+        }
+        DropDataInfo IDropDataInfo = ICurrentDropData.RandomPickDropInfo();
+        if (IDropDataInfo == null)
+        {
+            return;
+        }
+        SpawnItem(IDropDataInfo.ItemId, InDropPos);
+
+        Debug.Log("Spawn Item id : " + IDropDataInfo.ItemId + " / Drop Pos : " + InDropPos);
+    }
+
     private static ItemManager sInstance = null;
 }

@@ -26,3 +26,40 @@ public class ItemData
         return ("ItemId : " + Id + " / Type : " + Type.ToString());
     }
 }
+
+public class DropDataInfo
+{
+    public string ItemId;
+    public int DropRatio;
+
+    public int DropSelectMinValue;
+    public int DropSelectMaxValue;
+}
+
+public class DropData
+{
+    public List<DropDataInfo> DropList;
+    public void PostLoad()
+    {
+        foreach (var EachDrop in DropList)
+        {
+            EachDrop.DropSelectMinValue = mDropMaxValue;
+            mDropMaxValue += EachDrop.DropRatio;
+            EachDrop.DropSelectMaxValue = mDropMaxValue - 1;
+        }
+    }
+    public DropDataInfo RandomPickDropInfo()
+    {
+        int IRandomValue = Random.Range(0, mDropMaxValue);
+        foreach (var EachDrop in DropList)
+        {
+            if (IRandomValue >= EachDrop.DropSelectMinValue && IRandomValue <= EachDrop.DropSelectMaxValue)
+            {
+                return EachDrop;
+            }
+        }
+        return null;
+    }
+
+    private int mDropMaxValue = 0;
+}

@@ -32,7 +32,7 @@ public class SkillManager : MonoBehaviour
             NewSkillData.Cooltime = 0.5f;
             NewSkillData.Speed = 10.0f;
             NewSkillData.ActiveLevel = 1;
-            NewSkillData.Power = 100;
+            NewSkillData.Power = 10000;
             FireSkill(NewSkillData);
         }
     }

@@ -65,6 +65,9 @@ public class GameDataManager
         ItemResources.Clear();
         ItemResources = null;
 
+        DropDatas.Clear();
+        DropDatas = null;
+
         mLiveNpcUnitCount = 0;
     }
 
@@ -73,7 +76,38 @@ public class GameDataManager
         LoadStageData();
         LoadSkillData();
         LoadItemData();
+        LoadDropData();
     }
+
+    protected void LoadDropData()
+    {
+        DropDatas = new Dictionary<string, DropData>();
+        DropDatas.Clear();
+
+        TextAsset JsonTextAsset = Resources.Load<TextAsset>("Data/DropDatas");
+        string IJson = JsonTextAsset.text;
+        JObject IDataObject = JObject.Parse(IJson);
+        JToken IToken = IDataObject["DropData"];
+        JArray IArray = IToken.Value<JArray>();
+        foreach (JObject EachObject in IArray)
+        {
+            DropData NewDropData = new DropData();
+            string DropId = EachObject.Value<string>("DropId");
+            NewDropData.DropList = new List<DropDataInfo>();
+            JArray IDropArray = EachObject.Value<JArray>("DropInfos");
+            foreach (JObject EachDrop in IDropArray)
+            {
+                DropDataInfo NewDropInfo = new DropDataInfo();
+                NewDropInfo.ItemId = EachDrop.Value<string>("ItemId");
+                NewDropInfo.DropRatio = EachDrop.Value<int>("Ratio");
+
+                NewDropData.DropList.Add(NewDropInfo);
+            }
+            NewDropData.PostLoad();
+            DropDatas.Add(DropId, NewDropData);
+        }
+    }
+
     protected void LoadItemData()
     {
         ItemDatas = new Dictionary<string, ItemData>();
@@ -138,6 +172,15 @@ public class GameDataManager
             }
             StageDatas.Add(NewStageData.StageId, NewStageData);
         }
+    }
+
+    public DropData FindDropData(string InDropId)
+    {
+        if (DropDatas.ContainsKey(InDropId) == false)
+        {
+            return null;
+        }
+        return DropDatas[InDropId];
     }
 
     public ItemData GetItemData(string InItemId)
@@ -285,4 +328,6 @@ public class GameDataManager
 
     private Dictionary<string, ItemData> ItemDatas = null;
     private Dictionary<string, ItemBase> ItemResources = null;
+
+    private Dictionary<string, DropData> DropDatas = null;
 }

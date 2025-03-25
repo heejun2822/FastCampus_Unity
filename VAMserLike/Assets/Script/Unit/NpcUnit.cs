@@ -67,7 +67,7 @@ public class NpcUnit : UnitBase
         mIsNoneDamage = true;
         base.OnHit(InDamage);
 
-        Debug.Log("Npc : " + gameObject.name + "Hp : " + mUnitData.Hp);
+        // Debug.Log("Npc : " + gameObject.name + "Hp : " + mUnitData.Hp);
         if (mIsAlive)
         {
             StartCoroutine(_OnHitting());
@@ -86,8 +86,9 @@ public class NpcUnit : UnitBase
         gameObject.SetActive(false);
         GamePoolManager.aInstance.EnqueueNpcPool(this);
         GameDataManager.aInstance.mLiveNpcUnitCount = Mathf.Max(0, --GameDataManager.aInstance.mLiveNpcUnitCount);
-
         StopAllCoroutines();
+
+        ItemManager.aInstance.DropItem(transform.position);
     }
 
     private bool mIsNoneDamage = false;
