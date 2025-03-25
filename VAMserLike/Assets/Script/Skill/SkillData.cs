@@ -42,4 +42,5 @@ public class ActiveSkillData
     public float Cooltime;
     public float Speed;
     public Vector3 FirePosition;
+    public int Power;
 }

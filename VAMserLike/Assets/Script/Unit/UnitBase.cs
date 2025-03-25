@@ -13,7 +13,7 @@ public class UnitData
 
 public class UnitBase : MonoBehaviour
 {
-    public bool mIsAlive { private set; get; }
+    public bool mIsAlive { set; get; }
     public UnitData mUnitData { private set; get; }
     public int mUnitId { private set; get; }
 
@@ -29,17 +29,24 @@ public class UnitBase : MonoBehaviour
         mUnitData.TotalHp = mUnitData.Hp = InHp;
         mUnitData.Power = InPower;
         mUnitData.Armor = InArmor;
+        mIsAlive = true;
     }
 
     public virtual void OnHit(int InDamage)
     {
-        if (mUnitData != null)
+        if (mUnitData == null)
         {
             return;
+        }
+        int HitDamage = Mathf.Max(0, InDamage - mUnitData.Armor);
+        mUnitData.Hp -= HitDamage;
+        if (mUnitData.Hp <= 0)
+        {
+            OnDie();
         }
     }
     public virtual void OnDie()
     {
-        
+        mIsAlive = false;
     }
 }

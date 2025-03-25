@@ -7,9 +7,13 @@ public class NpcUnitMovement : UnitMovementBase
     // Start is called before the first frame update
     void Start()
     {
-        
+        mNpcUnit = GetComponent<NpcUnit>();
     }
 
+    void OnDestroy()
+    {
+        mNpcUnit = null;
+    }
     // Update is called once per frame
     protected override void Update()
     {
@@ -19,6 +23,10 @@ public class NpcUnitMovement : UnitMovementBase
 
     private void MoveToMyPc()
     {
+        if (mNpcUnit.mIsMoveToTarget == false)
+        {
+            return;
+        }
         Vector3 ITargetDirection = GameDataManager.aInstance.GetMyPcObject().transform.position - transform.position;
         Vector3 IDirect = ITargetDirection.normalized;
 
@@ -30,4 +38,6 @@ public class NpcUnitMovement : UnitMovementBase
                                                                     mRotationSpeed * Time.deltaTime);
         }
     }
+
+    private NpcUnit mNpcUnit = null;
 }
