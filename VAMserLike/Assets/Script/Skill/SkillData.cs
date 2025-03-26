@@ -38,9 +38,8 @@ public class SkillData
 public class ActiveSkillData
 {
     public SkillType Type;
-    public int ActiveLevel;
-    public float Cooltime;
-    public float Speed;
+    public SkillActiveType ActiveType;
+    public float CurrentCoolTime;
     public Vector3 FirePosition;
-    public int Power;
+    public SkillLevelData ActiveSkillLevelData;
 }

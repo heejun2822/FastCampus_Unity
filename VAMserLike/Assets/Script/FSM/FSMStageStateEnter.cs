@@ -30,6 +30,9 @@ public class FSMStageStateEnter : FSMStateBase
         if (MyPc != null)
         {
             MyPc.InitUnit(0, 10000, 100, 100);
+            SkillManager MySkillManager = MyPc.GetComponent<SkillManager>();
+            MySkillManager.AddSkillData(SkillType.Missile);
+            MySkillManager.AddSkillData(SkillType.ManualMissile);
         }
     }
 

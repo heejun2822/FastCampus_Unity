@@ -22,7 +22,7 @@ public class SkillManualMissile : SkillBase
         float CurrentLifeTime = 0.0f;
         while (true)
         {
-            Vector3 AddForceVector = mStartDir * mActiveSkillData.Speed * Time.deltaTime;
+            Vector3 AddForceVector = mStartDir * mActiveSkillData.ActiveSkillLevelData.Speed * Time.deltaTime;
             transform.position += new Vector3(AddForceVector.x, 0, AddForceVector.z);
             CurrentLifeTime += Time.deltaTime;
             if (CurrentLifeTime > 2.0f)
@@ -43,7 +43,7 @@ public class SkillManualMissile : SkillBase
         NpcUnit TargetNpcUnit = other.GetComponent<NpcUnit>();
         if (TargetNpcUnit != null)
         {
-            TargetNpcUnit.OnHit(mActiveSkillData.Power);
+            TargetNpcUnit.OnHit(mActiveSkillData.ActiveSkillLevelData.Power);
             StopSkill();
         }
     }
