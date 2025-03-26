@@ -59,6 +59,15 @@ public class GameDataManager
         SkillResources.Clear();
         SkillResources = null;
 
+        ItemDatas.Clear();
+        ItemDatas = null;
+
+        ItemResources.Clear();
+        ItemResources = null;
+
+        DropDatas.Clear();
+        DropDatas = null;
+
         mLiveNpcUnitCount = 0;
     }
 
@@ -66,6 +75,70 @@ public class GameDataManager
     {
         LoadStageData();
         LoadSkillData();
+        LoadItemData();
+        LoadDropData();
+    }
+
+    protected void LoadDropData()
+    {
+        DropDatas = new Dictionary<string, DropData>();
+        DropDatas.Clear();
+
+        TextAsset JsonTextAsset = Resources.Load<TextAsset>("Data/DropDatas");
+        string IJson = JsonTextAsset.text;
+        JObject IDataObject = JObject.Parse(IJson);
+        JToken IToken = IDataObject["DropData"];
+        JArray IArray = IToken.Value<JArray>();
+        foreach (JObject EachObject in IArray)
+        {
+            DropData NewDropData = new DropData();
+            string DropId = EachObject.Value<string>("DropId");
+            NewDropData.DropList = new List<DropDataInfo>();
+            JArray IDropArray = EachObject.Value<JArray>("DropInfos");
+            foreach (JObject EachDrop in IDropArray)
+            {
+                DropDataInfo NewDropInfo = new DropDataInfo();
+                NewDropInfo.ItemId = EachDrop.Value<string>("ItemId");
+                NewDropInfo.DropRatio = EachDrop.Value<int>("Ratio");
+
+                NewDropData.DropList.Add(NewDropInfo);
+            }
+            NewDropData.PostLoad();
+            DropDatas.Add(DropId, NewDropData);
+        }
+    }
+
+    protected void LoadItemData()
+    {
+        ItemDatas = new Dictionary<string, ItemData>();
+        ItemResources = new Dictionary<string, ItemBase>();
+        TextAsset JsonTextAsset = Resources.Load<TextAsset>("Data/Items");
+        string IJson = JsonTextAsset.text;
+        JObject IDataObject = JObject.Parse(IJson);
+        JToken IToken = IDataObject["Items"];
+        JArray IArray = IToken.Value<JArray>();
+        foreach (JObject EachObject in IArray)
+        {
+            ItemData NewItemData = new ItemData();
+            NewItemData.Id = EachObject.Value<string>("Id");
+            NewItemData.Path = EachObject.Value<string>("Path");
+            string ItemTypeString = EachObject.Value<string>("Type");
+            NewItemData.Type = Enum.Parse<EItemType>(ItemTypeString);
+            NewItemData.Value = EachObject.Value<int>("Value");
+
+            ItemDatas.Add(NewItemData.Id, NewItemData);
+            Debug.Log("New Item Add Complete : " + NewItemData.ShowItemDataLog());
+
+            ItemBase ItemObject = Resources.Load<ItemBase>(NewItemData.Path);
+            if (ItemObject == null)
+            {
+                Debug.LogError("Not Exist Path Prefabs : " + NewItemData.Path);
+            }
+            else
+            {
+                ItemResources.Add(NewItemData.Id, ItemObject);
+            }
+        }
     }
 
     protected void LoadStageData()
@@ -99,6 +172,33 @@ public class GameDataManager
             }
             StageDatas.Add(NewStageData.StageId, NewStageData);
         }
+    }
+
+    public DropData FindDropData(string InDropId)
+    {
+        if (DropDatas.ContainsKey(InDropId) == false)
+        {
+            return null;
+        }
+        return DropDatas[InDropId];
+    }
+
+    public ItemData GetItemData(string InItemId)
+    {
+        if (ItemDatas.ContainsKey(InItemId) == false)
+        {
+            return null;
+        }
+        return ItemDatas[InItemId];
+    }
+
+    public ItemBase GetItemObject(string InItemId)
+    {
+        if (ItemResources.ContainsKey(InItemId) == false)
+        {
+            return null;
+        }
+        return ItemResources[InItemId];
     }
 
     public StageData FindStageData(int InStageId)
@@ -225,4 +325,9 @@ public class GameDataManager
     private Dictionary<string, SkillBase> SkillResources = null;
 
     private Dictionary<int, StageData> StageDatas = null;
+
+    private Dictionary<string, ItemData> ItemDatas = null;
+    private Dictionary<string, ItemBase> ItemResources = null;
+
+    private Dictionary<string, DropData> DropDatas = null;
 }

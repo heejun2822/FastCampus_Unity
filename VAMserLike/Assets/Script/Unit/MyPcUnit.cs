@@ -66,6 +66,11 @@ public class MyPcUnit : UnitBase
         base.OnDie();
         FSMStageController.aInstance.ChangeState(new FSMStageStateExit());
     }
+    public override void OnGetterItem(ItemBase InItemBase)
+    {
+        base.OnGetterItem(InItemBase);
+        // TODO :: 아이템 타입별 어떤 처리를 할지를 이곳에서 구현
+    }
     // Update is called once per frame
     void Update()
     {

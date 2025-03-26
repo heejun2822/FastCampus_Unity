@@ -20,6 +20,7 @@ public class GamePoolManager
     {
         SkillPool = new Dictionary<SkillType, Queue<SkillBase>>();
         NpcPool = new Dictionary<string, Queue<NpcUnit>>();
+        ItemPool = new Dictionary<string, Queue<ItemBase>>();
     }
 
     public void Clear()
@@ -29,6 +30,41 @@ public class GamePoolManager
 
         NpcPool.Clear();
         NpcPool = null;
+
+        ItemPool.Clear();
+        ItemPool = null;
+    }
+
+    public void EnqueueItemPool(ItemBase InItem)
+    {
+        if (ItemPool == null)
+        {
+            return;
+        }
+        string ItemId = InItem.mItemData.Id;
+        if (ItemPool.ContainsKey(ItemId) == false)
+        {
+            ItemPool.Add(ItemId, new Queue<ItemBase>());
+        }
+        ItemPool[ItemId].Enqueue(InItem);
+    }
+
+    public ItemBase DequeueItemPool(string InItemId)
+    {
+        if (ItemPool == null)
+        {
+            return null;
+        }
+        if (ItemPool.ContainsKey(InItemId) == false)
+        {
+            return null;
+        }
+        if (ItemPool[InItemId].Count == 0)
+        {
+            return null;
+        }
+
+        return ItemPool[InItemId].Dequeue();
     }
 
     public void EnqueueSkillPool(SkillBase InSkill)
@@ -96,4 +132,5 @@ public class GamePoolManager
 
     private Dictionary<SkillType, Queue<SkillBase>> SkillPool = null;
     private Dictionary<string, Queue<NpcUnit>> NpcPool = null;
+    private Dictionary<string, Queue<ItemBase>> ItemPool = null;
 }
