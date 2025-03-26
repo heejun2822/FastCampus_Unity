@@ -49,4 +49,9 @@ public class UnitBase : MonoBehaviour
     {
         mIsAlive = false;
     }
+
+    public virtual void OnGetterItem(ItemBase InItemBase)
+    {
+        Debug.Log("Getter Item : " + InItemBase.mItemData.Id + " / Acquired Unit : " + mUnitId);
+    }
 }
