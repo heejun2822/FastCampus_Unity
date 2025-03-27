@@ -23,9 +23,7 @@ public class MyPcUnit : UnitBase
     public override void InitUnit(int InUnitId, int InHp, int InPower, int InArmor)
     {
         base.InitUnit(InUnitId, InHp, InPower, InArmor);
-        mExp = 0;
-        mMaxExp = MAX_EXP_FROM_LEVEL_VALUE;
-        mLevel = 1;
+        SetupLevel(1);
     }
 
     public void SetupLevel(int InLevel)
@@ -33,6 +31,8 @@ public class MyPcUnit : UnitBase
         mLevel = InLevel;
         mExp = 0;
         mMaxExp = MAX_EXP_FROM_LEVEL_VALUE * mLevel;
+
+        Debug.Log("Setup Level : " + InLevel);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,8 +58,10 @@ public class MyPcUnit : UnitBase
 
     public override void OnHit(int InDamage)
     {
+        // test code
+        InDamage = 0;
+
         base.OnHit(InDamage);
-        Debug.Log("Npc : " + gameObject.name + " / Hp : " + mUnitData.Hp);
     }
     public override void OnDie()
     {
@@ -69,7 +71,24 @@ public class MyPcUnit : UnitBase
     public override void OnGetterItem(ItemBase InItemBase)
     {
         base.OnGetterItem(InItemBase);
-        // TODO :: 아이템 타입별 어떤 처리를 할지를 이곳에서 구현
+        if (InItemBase == null)
+        {
+            return;
+        }
+
+        switch (InItemBase.mItemData.Type)
+        {
+            case EItemType.Exp:
+            {
+                mExp += InItemBase.mItemData.Value;
+                if (mExp > mMaxExp)
+                {
+                    SetupLevel(mLevel + 1);
+                    FSMStageController.aInstance.ChangeState(new FSMStageStateLevelup());
+                }
+            }
+            break;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -93,5 +112,5 @@ public class MyPcUnit : UnitBase
     }
 
     Dictionary<int, NpcUnit> HittedNpcs;
-    private const int MAX_EXP_FROM_LEVEL_VALUE = 10000;
+    private const int MAX_EXP_FROM_LEVEL_VALUE = 100;
 }

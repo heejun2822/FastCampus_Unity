@@ -23,6 +23,10 @@ public class NpcUnitMovement : UnitMovementBase
 
     private void MoveToMyPc()
     {
+        if (FSMStageController.aInstance.IsPlayGame() == false)
+        {
+            return;
+        }
         if (mNpcUnit.mIsMoveToTarget == false)
         {
             return;
