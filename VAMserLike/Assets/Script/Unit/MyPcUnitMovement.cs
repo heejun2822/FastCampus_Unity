@@ -28,6 +28,10 @@ public class MyPcUnitMovement : UnitMovementBase
 
     private void HandleMoving(Vector3 pDirect)
     {
+        if (FSMStageController.aInstance.IsPlayGame() == false)
+        {
+            return;
+        }
         // 이동
         transform.position += pDirect * mSpeed * Time.deltaTime;
         // 회전
@@ -38,6 +42,10 @@ public class MyPcUnitMovement : UnitMovementBase
 
     private void HandleMoveStart()
     {
+        if (FSMStageController.aInstance.IsPlayGame() == false)
+        {
+            return;
+        }
         if (mAnimator != null)
         {
             mAnimator.CrossFade("Run", 0.1f);

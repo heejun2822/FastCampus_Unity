@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2180bb760e3d6bb46825346530167590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MissileObject: {fileID: 6778340080915766178}
+  LevelMaterial:
+  - {fileID: 2100000, guid: 4991f9d0bbe88254da84f8b7b7223875, type: 2}
+  - {fileID: 2100000, guid: c421d89e1935239479849b2400ffc868, type: 2}
 --- !u!136 &3276413048564465151
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SkillManualMissile : SkillBase
 {
+    public GameObject MissileObject;
+    public List<Material> LevelMaterial;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,21 @@ public class SkillManualMissile : SkillBase
     public override void FireSkill(ActiveSkillData InSkillData, Vector3 InStartPos, Vector3 InStartDir)
     {
         base.FireSkill(InSkillData, InStartPos, InStartDir);
-        mSkillType = SkillType.ManualMissile;
+        if (InSkillData.ActiveSkillLevelData.Level != CurrentMySkillLevel)
+        {
+            CurrentMySkillLevel = InSkillData.ActiveSkillLevelData.Level;
+            if (MissileObject != null)
+            {
+                MeshRenderer MissileRenderer = MissileObject.GetComponent<MeshRenderer>();
+                if (MissileRenderer != null)
+                {
+                    List<Material> MissileMats = new List<Material>();
+                    MissileMats.Add(LevelMaterial[CurrentMySkillLevel - 1]);
+                    MissileRenderer.SetMaterials(MissileMats);
+
+                }
+            }
+        }
         StartCoroutine(_OnMissileLiftTime());
     }
 
@@ -47,4 +63,6 @@ public class SkillManualMissile : SkillBase
             StopSkill();
         }
     }
+
+    private int CurrentMySkillLevel = 0;
 }

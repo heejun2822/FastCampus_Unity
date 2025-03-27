@@ -35,6 +35,7 @@ public class FSMStageController
         {
             mStageFSM.ChangeState(InFSMState);
         }
+        Debug.Log("Change State : " + InFSMState.mCurrentStateType.ToString());
     }
 
     public void OnUpdate(float InDeltaTime)
