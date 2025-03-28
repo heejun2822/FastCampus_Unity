@@ -40,6 +40,14 @@ public class FSMStageStateProgress : FSMStateBase
     {
         base.OnProgress(InDeltaTime);
 
+        if (GameDataManager.aInstance.GetGameTime() > GAME_END_SECONDS)
+        {
+            FSMStageController.aInstance.ChangeState(new FSMStageStateExit());
+            return;
+        }
+
+        GameDataManager.aInstance.UpdateGameTime(InDeltaTime);
+
         mDurationTime += InDeltaTime;
         bool bSpawn = false;
         if (mDurationTime > mNextSpawnTime)
@@ -75,4 +83,6 @@ public class FSMStageStateProgress : FSMStateBase
     private int mNowSpawn = 0;
     private int mMaxSpawn = 0;
     private float mNextSpawnTime = 0.0f;
+
+    private const int GAME_END_SECONDS = 100;
 }

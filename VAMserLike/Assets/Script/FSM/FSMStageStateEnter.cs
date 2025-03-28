@@ -18,6 +18,7 @@ public class FSMStageStateEnter : FSMStateBase
         mDurationTime = 0;
 
         UIManager.aInstance.ShowHUDText("Ready");
+        UIManager.aInstance.ShowLevelupStateUI(false);
 
         int ICurrentStageId = GameDataManager.aInstance.mStage;
         StageData ICurrentStageData = GameDataManager.aInstance.FindStageData(ICurrentStageId);

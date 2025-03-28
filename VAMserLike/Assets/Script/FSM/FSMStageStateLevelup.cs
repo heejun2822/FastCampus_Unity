@@ -15,13 +15,13 @@ public class FSMStageStateLevelup : FSMStateBase
     public override void OnEnter()
     {
         base.OnEnter();
-        GameControl.aInstance.aOnMouseInput += _OnMouseInput;
+        UIManager.aInstance.ShowLevelupStateUI(true);
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        GameControl.aInstance.aOnMouseInput -= _OnMouseInput;
+        UIManager.aInstance.ShowLevelupStateUI(false);
     }
 
     public override void OnProgress(float InDeltaTime)
@@ -29,13 +29,13 @@ public class FSMStageStateLevelup : FSMStateBase
         base.OnProgress(InDeltaTime);
     }
 
-    private void _OnMouseInput(int InIndex, Vector3 InMousePos)
-    {
-        FSMStageController.aInstance.ChangeState(new FSMStageStateProgress());
-        SkillManager MyPcSkillManager = GameDataManager.aInstance.GetMyPcObject().GetComponent<SkillManager>();
-        if (MyPcSkillManager != null)
-        {
-            MyPcSkillManager.AddSkillData(SkillType.Missile);
-        }
-    }
+    // private void _OnMouseInput(int InIndex, Vector3 InMousePos)
+    // {
+    //     FSMStageController.aInstance.ChangeState(new FSMStageStateProgress());
+    //     SkillManager MyPcSkillManager = GameDataManager.aInstance.GetMyPcObject().GetComponent<SkillManager>();
+    //     if (MyPcSkillManager != null)
+    //     {
+    //         MyPcSkillManager.AddSkillData(SkillType.Missile);
+    //     }
+    // }
 }

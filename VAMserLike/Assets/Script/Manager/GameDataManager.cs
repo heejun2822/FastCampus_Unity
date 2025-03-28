@@ -40,7 +40,7 @@ public class GameDataManager
 
     public void Init()
     {
-
+        ClearGameTime();
     }
     public void Clear()
     {
@@ -69,6 +69,8 @@ public class GameDataManager
         DropDatas = null;
 
         mLiveNpcUnitCount = 0;
+
+        ClearGameTime();
     }
 
     public void LoadAll()
@@ -314,6 +316,20 @@ public class GameDataManager
         mStage = InStage;
     }
 
+    // 게임 시간과 관련된 구현사항 적용
+    public void UpdateGameTime(float InDeltaTime)
+    {
+        mCurrentGameTime += InDeltaTime;
+    }
+    public float GetGameTime()
+    {
+        return mCurrentGameTime;
+    }
+    public void ClearGameTime()
+    {
+        mCurrentGameTime = 0.0f;
+    }
+
     private static GameDataManager sInstance = null;
 
     private GameObject mMyPc;
@@ -330,4 +346,6 @@ public class GameDataManager
     private Dictionary<string, ItemBase> ItemResources = null;
 
     private Dictionary<string, DropData> DropDatas = null;
+
+    private float mCurrentGameTime = 0.0f;
 }

@@ -22,6 +22,9 @@ public class UIManager
     public delegate void OnSetExp(int InExp, int InMaxExp);
     public OnSetExp aOnSetExp { get; set; }
 
+    public delegate void OnShowLevelUpStateUI(bool InIsShow);
+    public OnShowLevelUpStateUI aOnShowLevelUpStateUI { get; set; }
+
     public void ShowHUDText(string InText)
     {
         if (aOnShowHUDText != null)
@@ -34,6 +37,14 @@ public class UIManager
         if (aOnShowHUDText != null)
         {
             aOnShowHUDText(false, string.Empty);
+        }
+    }
+
+    public void ShowLevelupStateUI(bool InIsShow)
+    {
+        if (aOnShowLevelUpStateUI != null)
+        {
+            aOnShowLevelUpStateUI(InIsShow);
         }
     }
 
