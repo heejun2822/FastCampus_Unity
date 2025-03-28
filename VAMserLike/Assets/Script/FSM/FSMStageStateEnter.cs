@@ -14,8 +14,10 @@ public class FSMStageStateEnter : FSMStateBase
     public override void OnEnter()
     {
         base.OnEnter();
-        mCountDown = 0;
+        mCountDown = 3;
         mDurationTime = 0;
+
+        UIManager.aInstance.ShowHUDText("Ready");
 
         int ICurrentStageId = GameDataManager.aInstance.mStage;
         StageData ICurrentStageData = GameDataManager.aInstance.FindStageData(ICurrentStageId);
@@ -31,7 +33,7 @@ public class FSMStageStateEnter : FSMStateBase
         {
             MyPc.InitUnit(0, 10000, 100, 100);
             SkillManager MySkillManager = MyPc.GetComponent<SkillManager>();
-            MySkillManager.AddSkillData(SkillType.Missile);
+            // MySkillManager.AddSkillData(SkillType.Missile);
             MySkillManager.AddSkillData(SkillType.ManualMissile);
         }
     }
@@ -39,7 +41,6 @@ public class FSMStageStateEnter : FSMStateBase
     public override void OnExit()
     {
         base.OnExit();
-        Debug.Log("Stage State Enter, Call Exit");
         mDurationTime = 0;
     }
 
@@ -55,8 +56,8 @@ public class FSMStageStateEnter : FSMStateBase
             }
             else
             {
+                UIManager.aInstance.ShowHUDText(mCountDown.ToString());
                 mCountDown--;
-                Debug.Log("Count Down - " + mCountDown);
             }
             mDurationTime = 0.0f;
         }

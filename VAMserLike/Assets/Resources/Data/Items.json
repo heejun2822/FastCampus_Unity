@@ -4,13 +4,13 @@
 			"Id": "Exp10",
 			"Type": "Exp",
 			"Path": "Prefabs/Items/ExpItem100",
-			"Value": 100
+			"Value": 50
 		},
 		{
 			"Id": "Exp15",
 			"Type": "Exp",
 			"Path": "Prefabs/Items/ExpItem150",
-			"Value": 150
+			"Value": 50
 		},
 		{
 			"Id": "ManualSword",

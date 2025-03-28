@@ -26,11 +26,23 @@ public class MyPcUnit : UnitBase
         SetupLevel(1);
     }
 
+    public void AddExp(int InAddExp)
+    {
+        mExp += InAddExp;
+        UIManager.aInstance.SetExp(mExp, mMaxExp);
+    }
+
+    public void SetExp(int InExp)
+    {
+        mExp = InExp;
+        UIManager.aInstance.SetExp(mExp, mMaxExp);
+    }
+
     public void SetupLevel(int InLevel)
     {
         mLevel = InLevel;
-        mExp = 0;
         mMaxExp = MAX_EXP_FROM_LEVEL_VALUE * mLevel;
+        SetExp(0);
 
         Debug.Log("Setup Level : " + InLevel);
     }
@@ -80,7 +92,7 @@ public class MyPcUnit : UnitBase
         {
             case EItemType.Exp:
             {
-                mExp += InItemBase.mItemData.Value;
+                AddExp(InItemBase.mItemData.Value);
                 if (mExp > mMaxExp)
                 {
                     SetupLevel(mLevel + 1);

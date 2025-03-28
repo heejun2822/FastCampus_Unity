@@ -14,7 +14,7 @@ public class FSMStageStateProgress : FSMStateBase
     public override void OnEnter()
     {
         base.OnEnter();
-        Debug.Log("Stage State Progress Enter");
+        UIManager.aInstance.HideHUDText();
 
         mNowSpawn = 10;
         mDurationTime = 0.0f;
