@@ -32,7 +32,7 @@
 				{
 					"Level" : 1,
 					"Path" : "Prefabs/Skill/Missile2",
-					"Power" : 500,
+					"Power" : 100,
 					"Size" : 1,
 					"Speed" : 10,
 					"ActiveTime" : 0.5,
@@ -41,7 +41,7 @@
 				{
 					"Level" : 2,
 					"Path" : "Prefabs/Skill/Missile2",
-					"Power" : 1000,
+					"Power" : 200,
 					"Size" : 1,
 					"Speed" : 15,
 					"ActiveTime" : 0.5,
