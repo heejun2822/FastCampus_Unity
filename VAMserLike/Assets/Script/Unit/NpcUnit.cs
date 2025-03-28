@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class NpcUnit : UnitBase
 {
+    public Transform mHpBarTransform;
+    public Transform mBillboardTransform;
+
     public StageUnitData mStageUnitData { get; set; }
     public bool mIsMoveToTarget { get; set; } = false;
     void Start()
     {
-        
+        mCamTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (mBillboardTransform != null)
+        {
+            mBillboardTransform.LookAt(mBillboardTransform.position + mCamTransform.rotation * Vector3.forward,
+                                        mCamTransform.rotation * Vector3.up);
+        }
     }
 
     public void Init(int InUnitId, StageUnitData InStageUnitData)
@@ -24,6 +31,16 @@ public class NpcUnit : UnitBase
         mIsMoveToTarget = true;
         mIsNoneDamage = false;
         GameDataManager.aInstance.mLiveNpcUnitCount++;
+        _UpdateHp();
+    }
+
+    private void _UpdateHp()
+    {
+        if (mHpBarTransform != null)
+        {
+            float IHpPercent = (float)mUnitData.Hp / mUnitData.TotalHp;
+            mHpBarTransform.localScale = new Vector3(IHpPercent, 1.0f, 1.0f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,8 +83,7 @@ public class NpcUnit : UnitBase
         }
         mIsNoneDamage = true;
         base.OnHit(InDamage);
-
-        // Debug.Log("Npc : " + gameObject.name + "Hp : " + mUnitData.Hp);
+        _UpdateHp();
         if (mIsAlive)
         {
             StartCoroutine(_OnHitting());
@@ -92,4 +108,5 @@ public class NpcUnit : UnitBase
     }
 
     private bool mIsNoneDamage = false;
+    private Transform mCamTransform = null;
 }
