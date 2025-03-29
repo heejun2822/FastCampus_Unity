@@ -8,7 +8,7 @@
 			[
 				{
 					"Level" : 1,
-					"Path" : "Prefabs/Skill/Missile1",
+					"Path" : "Prefabs/Skill/Missile3",
 					"Power" : 500,
 					"Size" : 1,
 					"Speed" : 10,
@@ -16,7 +16,7 @@
 				},
 				{
 					"Level" : 2,
-					"Path" : "Prefabs/Skill/Missile1",
+					"Path" : "Prefabs/Skill/Missile4",
 					"Power" : 600,
 					"Size" : 1,
 					"Speed" : 15,
@@ -31,8 +31,8 @@
 			[
 				{
 					"Level" : 1,
-					"Path" : "Prefabs/Skill/Missile2",
-					"Power" : 100,
+					"Path" : "Prefabs/Skill/Missile3",
+					"Power" : 1000,
 					"Size" : 1,
 					"Speed" : 10,
 					"ActiveTime" : 0.5,
@@ -40,7 +40,7 @@
 				},
 				{
 					"Level" : 2,
-					"Path" : "Prefabs/Skill/Missile2",
+					"Path" : "Prefabs/Skill/Missile4",
 					"Power" : 200,
 					"Size" : 1,
 					"Speed" : 15,

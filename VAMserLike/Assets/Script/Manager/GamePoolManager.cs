@@ -18,7 +18,7 @@ public class GamePoolManager
     }
     public void Init()
     {
-        SkillPool = new Dictionary<SkillType, Queue<SkillBase>>();
+        SkillPool = new Dictionary<string, Queue<SkillBase>>();
         NpcPool = new Dictionary<string, Queue<NpcUnit>>();
         ItemPool = new Dictionary<string, Queue<ItemBase>>();
     }
@@ -67,35 +67,50 @@ public class GamePoolManager
         return ItemPool[InItemId].Dequeue();
     }
 
-    public void EnqueueSkillPool(SkillBase InSkill)
+    public void EnqueueSkillPool(SkillBase InSkill, int InSkillLevel)
     {
         if (SkillPool == null)
         {
             return;
         }
-        if (SkillPool.ContainsKey(InSkill.mSkillType) == false)
+        string SkillId = GameDataManager.aInstance.GetSkillId(InSkill.mActiveSkillData.Type, InSkillLevel);
+        if (SkillPool.ContainsKey(SkillId) == false)
         {
-            SkillPool.Add(InSkill.mSkillType, new Queue<SkillBase>());
+            SkillPool.Add(SkillId, new Queue<SkillBase>());
         }
-        SkillPool[InSkill.mSkillType].Enqueue(InSkill);
+        SkillPool[SkillId].Enqueue(InSkill);
     }
 
-    public SkillBase DequeueSkillPool(SkillType InSkillType)
+    public SkillBase DequeueSkillPool(SkillLevelData InSkillLevelData)
     {
         if (SkillPool == null)
         {
             return null;
         }
-        if (SkillPool.ContainsKey(InSkillType) == false)
+        string SkillId = GameDataManager.aInstance.GetSkillId(InSkillLevelData);
+
+        if (SkillPool.ContainsKey(SkillId) == false)
         {
             return null;
         }
-        if (SkillPool[InSkillType].Count == 0)
+        if (SkillPool[SkillId].Count == 0)
         {
             return null;
         }
-        return SkillPool[InSkillType].Dequeue();
+        return SkillPool[SkillId].Dequeue();
     }
+    public void ClearSkillPoolObjects()
+    {
+        foreach (var EachPool in SkillPool)
+        {
+            foreach (var EachObject in EachPool.Value)
+            {
+                GameObject.Destroy(EachObject.gameObject);
+            }
+        }
+        SkillPool.Clear();
+    }
+
 
     public void EnqueueNpcPool(NpcUnit InNpcUnit)
     {
@@ -130,7 +145,7 @@ public class GamePoolManager
 
     private static GamePoolManager sInstance = null;
 
-    private Dictionary<SkillType, Queue<SkillBase>> SkillPool = null;
+    private Dictionary<string, Queue<SkillBase>> SkillPool = null;
     private Dictionary<string, Queue<NpcUnit>> NpcPool = null;
     private Dictionary<string, Queue<ItemBase>> ItemPool = null;
 }
