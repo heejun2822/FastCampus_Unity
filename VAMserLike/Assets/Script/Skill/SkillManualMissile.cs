@@ -9,12 +9,13 @@ public class SkillManualMissile : SkillBase
     // Start is called before the first frame update
     void Start()
     {
-        
+        mMissileParticle = GetComponent<ParticleSystem>();
     }
 
     public override void FireSkill(ActiveSkillData InSkillData, Vector3 InStartPos, Vector3 InStartDir)
     {
         base.FireSkill(InSkillData, InStartPos, InStartDir);
+
         if (InSkillData.ActiveSkillLevelData.Level != CurrentMySkillLevel)
         {
             CurrentMySkillLevel = InSkillData.ActiveSkillLevelData.Level;
@@ -36,14 +37,19 @@ public class SkillManualMissile : SkillBase
     public IEnumerator _OnMissileLiftTime()
     {
         float CurrentLifeTime = 0.0f;
+        Vector3 MovePosition = Vector3.zero;
         while (true)
         {
-            Vector3 AddForceVector = mStartDir * mActiveSkillData.ActiveSkillLevelData.Speed * Time.deltaTime;
-            transform.position += new Vector3(AddForceVector.x, 0, AddForceVector.z);
-            CurrentLifeTime += Time.deltaTime;
-            if (CurrentLifeTime > 2.0f)
+            if (FSMStageController.aInstance.IsPlayGame())
             {
-                break;
+                Vector3 AddForceVector = mStartDir * mActiveSkillData.ActiveSkillLevelData.Speed * Time.deltaTime;
+                MovePosition += new Vector3(AddForceVector.x, 0, AddForceVector.z);
+                transform.position = mStartPos + MovePosition;
+                CurrentLifeTime += Time.deltaTime;
+                if (CurrentLifeTime > 2.0f)
+                {
+                    break;
+                }
             }
             yield return null;
         }
@@ -63,6 +69,13 @@ public class SkillManualMissile : SkillBase
             StopSkill();
         }
     }
+    public override void StopSkill()
+    {
+        base.StopSkill();
+        StopAllCoroutines();
+    }
 
     private int CurrentMySkillLevel = 0;
+    private ParticleSystem mMissileParticle;
+    private AudioSource mFireSoundSource;
 }

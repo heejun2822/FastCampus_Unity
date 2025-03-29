@@ -9,8 +9,11 @@ public class NpcUnit : UnitBase
 
     public StageUnitData mStageUnitData { get; set; }
     public bool mIsMoveToTarget { get; set; } = false;
-    void Start()
+
+    public AudioClip mHitAudioClip;
+    public override void Start()
     {
+        base.Start();
         mCamTransform = Camera.main.transform;
     }
 
@@ -81,6 +84,12 @@ public class NpcUnit : UnitBase
         {
             return;
         }
+        if (mUnitAudioSource != null)
+        {
+            mUnitAudioSource.clip = mHitAudioClip;
+            mUnitAudioSource.Play();
+        }
+
         mIsNoneDamage = true;
         base.OnHit(InDamage);
         _UpdateHp();

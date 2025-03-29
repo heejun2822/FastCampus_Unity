@@ -17,9 +17,14 @@ public class UnitBase : MonoBehaviour
     public UnitData mUnitData { private set; get; }
     public int mUnitId { private set; get; }
 
-    void Start()
+    public virtual void Start()
     {
-        
+        mUnitAudioSource = GetComponent<AudioSource>();
+        if (mUnitAudioSource != null)
+        {
+            mUnitAudioSource.enabled = true;
+            mUnitAudioSource.playOnAwake = false;
+        }
     }
 
     public virtual void InitUnit(int InUnitId, int InHp, int InPower, int InArmor)
@@ -54,4 +59,6 @@ public class UnitBase : MonoBehaviour
     {
         Debug.Log("Getter Item : " + InItemBase.mItemData.Id + " / Acquired Unit : " + mUnitId);
     }
+
+    protected AudioSource mUnitAudioSource;
 }

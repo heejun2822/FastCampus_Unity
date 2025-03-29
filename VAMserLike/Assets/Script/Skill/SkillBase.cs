@@ -8,6 +8,18 @@ public class SkillBase : MonoBehaviour
     public Vector3 mStartPos { get; private set; }
     public Vector3 mStartDir { get; private set; }
     public ActiveSkillData mActiveSkillData { get; private set; }
+
+    public AudioClip mFireAudioClip;
+    public virtual void Awake()
+    {
+        mFireAudioSource = GetComponent<AudioSource>();
+        if (mFireAudioSource != null)
+        {
+            mFireAudioSource.enabled = true;
+            mFireAudioSource.playOnAwake = false;
+        }
+
+    }
     public virtual void FireSkill(ActiveSkillData InSkillData, Vector3 InStartPos, Vector3 InStartDir)
     {
         mActiveSkillData = InSkillData;
@@ -16,6 +28,12 @@ public class SkillBase : MonoBehaviour
         mSkillLevel = InSkillData.ActiveSkillLevelData.Level;
 
         transform.position = mStartPos;
+        if (mFireAudioClip != null)
+        {
+            mFireAudioSource.clip = mFireAudioClip;
+            mFireAudioSource.Play();
+        }
+
     }
 
     public virtual void StopSkill()
@@ -41,4 +59,5 @@ public class SkillBase : MonoBehaviour
     }
 
     private int mSkillLevel;
+    protected AudioSource mFireAudioSource;
 }
