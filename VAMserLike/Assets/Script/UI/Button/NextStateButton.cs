@@ -28,6 +28,7 @@ public class NextStateButton : MonoBehaviour
         if (MyPcSkillManager != null)
         {
             MyPcSkillManager.AddSkillData(SkillType.Missile);
+            GamePoolManager.aInstance.ClearSkillPoolObjects();
         }
     }
     private Button mCurrentButton;

@@ -13,6 +13,7 @@ public class SkillBase : MonoBehaviour
         mActiveSkillData = InSkillData;
         mStartPos = InStartPos;
         mStartDir = InStartDir;
+        mSkillLevel = InSkillData.ActiveSkillLevelData.Level;
 
         transform.position = mStartPos;
     }
@@ -20,7 +21,14 @@ public class SkillBase : MonoBehaviour
     public virtual void StopSkill()
     {
         gameObject.SetActive(false);
-        GamePoolManager.aInstance.EnqueueSkillPool(this);
+        if (mSkillLevel == mActiveSkillData.ActiveSkillLevelData.Level)
+        {
+            GamePoolManager.aInstance.EnqueueSkillPool(this, mSkillLevel);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public virtual void Update()
@@ -31,4 +39,6 @@ public class SkillBase : MonoBehaviour
     {
         
     }
+
+    private int mSkillLevel;
 }

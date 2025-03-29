@@ -2313,7 +2313,6 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 925350703}
   - {fileID: 1816539033}
   - {fileID: 187146418}
   - {fileID: 1449909035}
@@ -2321,4 +2320,5 @@ SceneRoots:
   - {fileID: 1746520578}
   - {fileID: 892458547}
   - {fileID: 19497325}
+  - {fileID: 925350703}
   - {fileID: 705095729}

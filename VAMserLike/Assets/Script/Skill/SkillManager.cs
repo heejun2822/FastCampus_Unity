@@ -179,7 +179,7 @@ public class SkillManager : MonoBehaviour
 
     public void FireSkillObject(ActiveSkillData InSkillData, Vector3 InStartPos, Vector3 InSkillDir)
     {
-        SkillBase SkillObject = GamePoolManager.aInstance.DequeueSkillPool(InSkillData.Type);
+        SkillBase SkillObject = GamePoolManager.aInstance.DequeueSkillPool(InSkillData.ActiveSkillLevelData);
         if (SkillObject == null)
         {
             SkillBase NewSkillObjectPrefab = GameDataManager.aInstance.GetSkillObjectPrefab(InSkillData.Type, InSkillData.ActiveSkillLevelData.Level);
